@@ -10,6 +10,7 @@ const JUMP_TERMINATION_MULTIPLIER: int = 3
 
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var sprite: Sprite2D = $Sprite2D
 
 func _ready():
 	pass
@@ -48,5 +49,13 @@ func update_animation(movement_vector: Vector2):
 	if movement_vector.x != 0:
 		animated_sprite.play("walk")
 		animated_sprite.flip_h = movement_vector.x < 0
+		sprite.scale.y = -1.2 if movement_vector.x < 0 else 1.2
 	else:
 		animated_sprite.play("idle")
+	
+	if velocity.y != 0:
+		animated_sprite.play("jump")
+		if velocity.y < 0:
+			animated_sprite.frame = 0
+		else:
+			animated_sprite.frame = 1
