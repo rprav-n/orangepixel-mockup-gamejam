@@ -77,6 +77,11 @@ scale = Vector2(1.2, 1.2)
 texture = ExtResource("3_5gcdd")
 offset = Vector2(-8, -8)
 
+[node name="Marker2D" type="Marker2D" parent="Sprite2D"]
+position = Vector2(-7.50014, -13.3333)
+rotation = 1.5708
+scale = Vector2(0.833333, -0.833333)
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_tp7bc")
 animation = &"idle"

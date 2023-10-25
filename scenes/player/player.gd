@@ -11,6 +11,7 @@ const JUMP_TERMINATION_MULTIPLIER: int = 3
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var marker: Marker2D = $Sprite2D/Marker2D
 
 func _ready():
 	pass
@@ -34,7 +35,7 @@ func _physics_process(delta: float):
 		velocity.y += GRAVITY * delta
 	
 	move_and_slide()
-	
+	shoot_bullet()
 	update_animation(movement_vector)
 	
 
@@ -59,3 +60,11 @@ func update_animation(movement_vector: Vector2):
 			animated_sprite.frame = 0
 		else:
 			animated_sprite.frame = 1
+
+
+func shoot_bullet():
+	var direction: int = -1 if animated_sprite.flip_h == true else 1
+	
+	if Input.is_action_just_pressed("shoot"):
+		GameEvent.emit_signal("shoot", marker.global_position, direction)
+

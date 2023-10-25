@@ -1,18 +1,16 @@
 [gd_scene load_steps=4 format=3 uid="uid://crlegm3s6jmne"]
 
 [ext_resource type="PackedScene" uid="uid://csmr0b6psg4t4" path="res://scenes/player/player.tscn" id="1_5bskj"]
+[ext_resource type="Script" path="res://scenes/main/main.gd" id="1_72in2"]
 [ext_resource type="TileSet" uid="uid://dgsffe64yieif" path="res://resources/tileset.tres" id="1_qmfxw"]
-[ext_resource type="PackedScene" uid="uid://ddjmwljut8e7o" path="res://scenes/enemy/enemy.tscn" id="3_8yam0"]
 
 [node name="Main" type="Node"]
+script = ExtResource("1_72in2")
 
-[node name="TileMap" type="TileMap" parent="."]
+[node name="TileMap" type="TileMap" parent="." groups=["terrain_group"]]
 tile_set = ExtResource("1_qmfxw")
 format = 2
 layer_0/tile_data = PackedInt32Array(720908, 0, 3, 720909, 65536, 3, 720910, 65536, 3, 720911, 65536, 3, 720913, 65536, 3, 720912, 65536, 3, 720914, 65536, 3, 720915, 65536, 3, 720916, 65536, 3, 720917, 65536, 3, 720918, 65536, 3, 720919, 65536, 3, 720920, 65536, 3, 720921, 65536, 3, 720922, 131072, 3, 655384, 65536, 3, 589848, 65536, 3, 524312, 65536, 3, 524313, 65536, 3, 589849, 65536, 3, 655385, 65536, 3, 655386, 131072, 3, 589850, 131072, 3, 524314, 131072, 3, 458766, 0, 3, 458767, 65536, 3, 458768, 65536, 3, 458769, 65536, 3, 458770, 65536, 3, 458771, 131072, 3)
 
 [node name="Player" parent="." instance=ExtResource("1_5bskj")]
 position = Vector2(365, 107)
-
-[node name="Enemy" parent="." instance=ExtResource("3_8yam0")]
-position = Vector2(261, 20)
