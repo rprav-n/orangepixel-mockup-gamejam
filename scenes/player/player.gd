@@ -9,9 +9,11 @@ const JUMP_SPEED: int = 340
 const JUMP_TERMINATION_MULTIPLIER: int = 3
 
 
-@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var sprite: Sprite2D = $Sprite2D
-@onready var marker: Marker2D = $Sprite2D/Marker2D
+@onready var animated_sprite: AnimatedSprite2D = $Node2D/AnimatedSprite2D
+@onready var sprite: Sprite2D = $Node2D/Sprite2D
+@onready var marker: Marker2D = $Node2D/Sprite2D/Marker2D
+@onready var node: Node2D = $Node2D
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 func _ready():
 	pass
@@ -49,8 +51,7 @@ func get_movement_vector() -> Vector2:
 func update_animation(movement_vector: Vector2):
 	if movement_vector.x != 0:
 		animated_sprite.play("walk")
-		animated_sprite.flip_h = movement_vector.x < 0
-		sprite.scale.y = -1.2 if movement_vector.x < 0 else 1.2
+		node.scale.x = 1 if movement_vector.x > 0 else -1
 	else:
 		animated_sprite.play("idle")
 	
@@ -59,12 +60,12 @@ func update_animation(movement_vector: Vector2):
 		if velocity.y < 0:
 			animated_sprite.frame = 0
 		else:
-			animated_sprite.frame = 1
+			animated_sprite.frame = 0 # Change to 1 if falling animation is needed
 
 
 func shoot_bullet():
-	var direction: int = -1 if animated_sprite.flip_h == true else 1
-	
 	if Input.is_action_just_pressed("shoot"):
+		animation_player.play("recoil")
+		var direction: int = int(node.scale.x)
 		GameEvent.emit_signal("shoot", marker.global_position, direction)
 
