@@ -40,6 +40,8 @@ func _physics_process(delta: float):
 	shoot_bullet()
 	update_animation(movement_vector)
 	
+	GameEvent.emit_signal("camera_follow_player", global_position)
+	
 
 func get_movement_vector() -> Vector2:
 	var movement_vector: Vector2 = Vector2.ZERO

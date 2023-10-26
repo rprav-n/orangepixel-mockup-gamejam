@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ddjmwljut8e7o"]
+[gd_scene load_steps=9 format=3 uid="uid://ddjmwljut8e7o"]
 
 [ext_resource type="Script" path="res://scenes/enemy/enemy.gd" id="1_b4e82"]
 [ext_resource type="Texture2D" uid="uid://cxtp0o7x34dom" path="res://assets/Characters/character1_23x29.png" id="1_wnkn7"]
@@ -32,6 +32,9 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1q6mc"]
+size = Vector2(20, 29)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3lrs0"]
 size = Vector2(15, 22)
 
@@ -44,6 +47,16 @@ animation = &"walk"
 autoplay = "walk"
 offset = Vector2(0, -14.5)
 
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -14.5)
+shape = SubResource("RectangleShape2D_1q6mc")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -11)
 shape = SubResource("RectangleShape2D_3lrs0")
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
